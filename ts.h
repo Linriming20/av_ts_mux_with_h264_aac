@@ -26,7 +26,7 @@
 
 /* PID: 13 bit */
 #define TS_PID_PAT 				0x0000 	/* fixed */
-#define TS_PID_PMT 				0x0FFF 	/* fixed */
+#define TS_PID_PMT 				0x0FFF 	/* custom */
 #define TS_PID_H264 			0x0007 	/* custom */
 #define TS_PID_AAC 				0x0008 	/* custom */
 
