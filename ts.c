@@ -25,7 +25,7 @@ static int fixFirstPacketAdaptionFieldStruct(T_AdaptationField *ptAdaptationFiel
 
 	ptAdaptationField->adaptation_field_length = 7; /* pcr_flag = 1: has pcr */
 	ptAdaptationField->discontinuty_indicator = 0;
-	ptAdaptationField->random_access_indicator = 0;
+	ptAdaptationField->random_access_indicator = 0; /* is keyflame? always 0, you can set it such "iskeyflame?1:0" */
 	ptAdaptationField->elementary_stream_priority_indicator = 0;
 	/* 5 flags for optional fields */
 	ptAdaptationField->pcr_flag = 1;
@@ -53,7 +53,7 @@ static int fixCommonAdaptionFieldStruct(T_AdaptationField *ptAdaptationField)
 
 	ptAdaptationField->adaptation_field_length = 1; /* 5 flags = 0 */
 	ptAdaptationField->discontinuty_indicator = 0;
-	ptAdaptationField->random_access_indicator = 0;
+	ptAdaptationField->random_access_indicator = 0; /* is keyflame? always 0, you can set it such "iskeyflame?1:0" */
 	ptAdaptationField->elementary_stream_priority_indicator = 0;
 	/* 5 flags for optional fields */
 	ptAdaptationField->pcr_flag = 0;
@@ -82,7 +82,7 @@ static int fixAdtsFrameToPesStruct(uint8_t *adtsData, uint32_t adtsDataLen, uint
 
 	/* pes header */
 	ptAdtsPesStu->packet_start_code_prefix = 0x000001;
-	ptAdtsPesStu->stream_id = TS_STREAM_ID_AAC;
+	ptAdtsPesStu->stream_id = TS_STREAM_ID_AUDIO;
 	ptAdtsPesStu->pes_packet_length = 0;
 	ptAdtsPesStu->marker_bit = 0b10;
 	ptAdtsPesStu->pes_scrambling_control = 0b00;
@@ -144,7 +144,7 @@ int fixH264FrameToPesStruct(uint8_t *h264Data, uint32_t h264DataLen, uint64_t pt
 
 	/* pes header */
 	ptH264PesStu->packet_start_code_prefix = 0x000001;
-	ptH264PesStu->stream_id = TS_STREAM_ID_H264;
+	ptH264PesStu->stream_id = TS_STREAM_ID_VIDEO;
 	ptH264PesStu->pes_packet_length = 0;
 	ptH264PesStu->marker_bit = 0b10;
 	ptH264PesStu->pes_scrambling_control = 0b00;

@@ -31,8 +31,8 @@
 #define TS_PID_AAC 				0x0008 	/* custom */
 
 
-#define TS_STREAM_ID_H264 		0xE0 	/* always */
-#define TS_STREAM_ID_AAC 		0xC0 	/* always */
+#define TS_STREAM_ID_VIDEO 		0xE0 	/* always */
+#define TS_STREAM_ID_AUDIO 		0xC0 	/* always */
 
 
 #define PMT_STREAM_TYPE_H264 	0x1B 	/* fixed */

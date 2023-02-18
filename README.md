@@ -7,9 +7,37 @@ $ ./ts_mux_h264_aac
 Usage:
    ./ts_mux_h264_aac avfile/test1_856x480_24fps.h264 24 avfile/test1_44100_stereo.aac out1.ts
    ./ts_mux_h264_aac avfile/test2_720x480_30fps.h264 60 avfile/test2_48000_stereo.aac out2.ts
+   ./ts_mux_h264_aac avfile/test3_1280x720_20fps.h264 20 avfile/test1_44100_stereo.aac out3.ts
 ```
 
 （注：目前合成的out1.ts在使用potPlayer播放时进度条有点问题，待修复。）
+
+**目前合成视频的现象：**
+
+（out2.ts含有除SPS、PPS、IDR、PSLICE以外的其他NALU，所以主要看out1.ts和out3.ts）
+
+- **out1.ts：**
+  - 电影和电视、ACG播放器
+    - 播放不流畅（含有B帧，而程序只填pts没填dts导致，对比out3.ts可知，无关紧要）；
+    - 正常播放进度条时长正常（29s），拖动后有声音但画面卡住一会才动、音视频同步；
+  - VLC
+    - 播放不流畅（含有B帧，而程序只填pts没填dts导致，对比out3.ts可知，无关紧要）；
+    - 正常播放进度条时长正常（29s），拖动后有声音但画面会灰屏有画面在动过一会才恢复、音视频同步；
+  - potplayer
+    - 播放流畅；
+    - 正常播放时进度条时长不正常（21s），拖动画面不会卡住、但音视频有时不同步；
+- **out3.ts**
+  - 电影和电视、ACG播放器
+    - 播放流畅；
+    - 正常播放进度条时长正常（30s），拖动后有声音但画面卡住一会才动、音视频“同步”；
+  - VLC
+    - 播放流畅；
+    - 正常播放进度条时长正常（30s），拖动后有声音但画面会灰屏有画面在动过一会才恢复、音视频“同步”；
+  - potplayer
+    - 播放流畅；
+    - 正常播放时进度条时长不正常（8s），拖动画面和声音都会卡住一会才动；
+
+
 
 
 
@@ -47,10 +75,12 @@ $ tree
 ├── avfile
 │   ├── out1.ts
 │   ├── out2.ts
+│   ├── out3.ts
 │   ├── test1_44100_stereo.aac
 │   ├── test1_856x480_24fps.h264
 │   ├── test2_48000_stereo.aac
-│   └── test2_720x480_30fps.h264
+│   ├── test2_720x480_30fps.h264
+│   └── test3_1280x720_20fps.h264
 ├── crcLib.c
 ├── crcLib.h
 ├── docs
